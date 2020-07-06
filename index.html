@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app="meuModulo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body ng-controller="indexController">
+    <header class="container">
+        <div class="row">
+            <h2 ng-bind="titulo"></h2>
+        </div>
+    </header>
+    <main class="container"> 
+        <div class="row">
+            <input type="text"  ng-model="busca" placeholder="Buscar question"> <!--ng-model: váriavel de mão duplia, que é utilizada no model view ou controller-->
+
+        </div>
+            <div class="row">
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Questão</th>
+                        <th>Resposta Certa</th>
+                        <th>Alternativa errada 1</th>
+                        <th>Alternativa errada 2</th>
+                        <th>Alternativa errada 3</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="question in questions track by $index">  <!--filter é uma função do angular que serve para filtrar elementos da página-->
+                        <td>{{question.quest}}</td>
+                        <td>{{question.correct}}</td>
+                        <td>{{question.incorrecta}}</td>
+                        <td>{{question.incorrectb}}</td>
+                        <td>{{question.incorrectc}}</td>
+                        <td>
+                            <button ng-click="editarquestion(question)" data-target="modal1" class="btn blue">Editar</button>
+                            <button ng-click="deletarquestion(question,$index)" data-target="modal1" class="btn red">Deletar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <!-- Modal Trigger -->
+            <a ng-click= "abreAddquestion()" class="waves-effect waves-light btn" >Adicionar</a>
+            <a class="waves-effect waves-light btn-small" style="float: right" href="game.html">JOGAR</a>
+        </div>
+    </main>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">     
+            <h4 ng-if="!editando">Adicionar question</h4>
+            <h4 ng-if="editando">Editar question</h4>
+            <p>Preencha os dados do question</p>
+            <div class="row">
+                <div class="input-field col m6 s6">
+                    <input type="text" ng-model ="question.quest" class="validate" placeholder="Pergunta">
+                </div>
+                <div class="input-field col m6 s6">
+                    <input type="text" ng-model ="question.correct" class="validate" placeholder="Resposta certa">
+                </div>
+                <div class="input-field col m4 s12">
+                    <input type="text" ng-model ="question.incorrecta" class="validate" placeholder="Resposta errada 1">
+                </div>
+                <div class="input-field col m4 s12">
+                    <input type="text" ng-model ="question.incorrectb" class="validate" placeholder="Resposta errada 2">
+                </div>
+                <div class="input-field col m4 s12">
+                    <input type="text" ng-model ="question.incorrectc" class="validate" placeholder="Resposta errada 3">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+            <a ng-if="!editando" ng-click="addquestion(question)"  class="waves-effect waves-light btn blue" href="#modal1">Adicionar</a>
+            <a ng-if="editando" ng-click="salvarquestion(question)"  class="waves-effect waves-light btn blue" href="#modal1">Salvar</a>
+        </div>
+    </div>
+    
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <script src="js/materalize/init.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="js/app/app_index.js"></script>
+    <script src="js/app/controller_index.js"></script>
+</body>
+</html>
