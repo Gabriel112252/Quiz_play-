@@ -55,7 +55,7 @@ m.controller("MyController", ["$scope", "$http", function ($scope, $http) {
       if ($scope.resp == $scope.correta)
         $scope.placar();
       else
-        alert("ah não mano =(");
+        alert("ah não mano =( A resposta correta é: "+$scope.correta);
         
       if ($scope.allQuestions.length == ++$scope.level) {
         $scope.placarFinal();
